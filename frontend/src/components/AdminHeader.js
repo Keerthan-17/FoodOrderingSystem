@@ -1,7 +1,13 @@
 import React from 'react'
 import { FaBars, FaBell, FaSignOutAlt } from 'react-icons/fa'
-
+import { useNavigate } from 'react-router-dom'
 const AdminHeader = () => {
+
+  const navigate = useNavigate()
+  const handlelogout = ()=>{
+    localStorage.removeItem('adminUser')
+    navigate('/admin-login')
+  }
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-white border-bottom px-3 shadow'>
       <span className='navbar-brand fw-semibold'>
@@ -20,7 +26,7 @@ const AdminHeader = () => {
             </button>
           </li>
           <li className='nav-item'>
-            <button className='btn btn-outline-danger'>
+            <button className='btn btn-outline-danger' onClick={handlelogout}>
               <FaSignOutAlt className='me-1'/>Log Out
             </button>
           </li>
