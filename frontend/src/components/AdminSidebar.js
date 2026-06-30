@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/admin.css'
 import { Link } from 'react-router-dom'
-import { FaChevronDown, FaChevronUp, FaComment, FaCommentAlt, FaEdit, FaFile, FaSearch, FaThLarge, FaUsers } from 'react-icons/fa'
+import { FaChevronDown, FaChevronUp, FaCommentAlt, FaEdit, FaFile, FaList, FaSearch, FaThLarge, FaUsers } from 'react-icons/fa'
 const AdminSidebar = () => {
 
   const [openMenus, setOpenMenus] = useState({
@@ -63,7 +63,7 @@ const AdminSidebar = () => {
         )}
       
       <button onClick={() => toogleMenu('orders')} className='list-group-item list-group-item-action bg-dark text-white border-0'>
-        <FaEdit/> Orders {openMenus.orders ? <FaChevronUp/> : <FaChevronDown/>}
+        <FaList/> Orders {openMenus.orders ? <FaChevronUp/> : <FaChevronDown/>}
       </button>
         {openMenus.orders &&(
           <div className='ps-4'>
