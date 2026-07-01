@@ -17,8 +17,13 @@
   
 }
 
-#page-content-wrapper{
+#page-content-wrapper.with-sidebar{
   margin-left: 250px;
+  transition: margin-left 0.3s ease-in-out;
+}
+#page-content-wrapper.full-sidebar{
+  margin-left: 0px;
+  transition: margin-left 0.3s ease-in-out;
 }
 
 .panel-icon{
