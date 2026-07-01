@@ -18,14 +18,16 @@ const AdminLayout = ({children}) => {
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, []);
+
+  const toogleSidebar = () => setSidebarOpen(prev => !prev);
   
   return (
     <div className='d-flex'>
       {sidebarOpen && <AdminSidebar/>}
       
       <div id='page-content-wrapper' className={`flex-grow-1 ${sidebarOpen ? 'with-sidebar' : 'full-sidebar'}`}>
-        <AdminHeader/>
+        <AdminHeader toogleSidebar = {toogleSidebar} sidebarOpen = {sidebarOpen}/>
         <div className='container-fluid mt-4'>
           {children}
         </div>
