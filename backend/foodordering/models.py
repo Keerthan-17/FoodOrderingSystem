@@ -17,7 +17,7 @@ class Category(models.Model):
   creation_date = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
-    return {self.category_name}
+    return self.category_name
   
 class Food(models.Model):
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
