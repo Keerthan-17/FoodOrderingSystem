@@ -5,14 +5,27 @@ import { Link } from 'react-router-dom'
 const ManageCategory = () => {
   
   const [categories, setCategories] = useState([])
+  const [allcategories, setAllCategories] = useState([])
 
   useEffect(()=>{
     fetch('http://127.0.0.1:8000/api/manage-category/')
       .then(res=> res.json())
       .then(data => {
         setCategories(data)
+        setAllCategories(data)
       })
   },[])
+
+  const handleSearch = (s)=>{
+    const keyword = s.toLowerCase()
+    if (!keyword){
+      setCategories(allcategories)
+    }
+    else{
+      const filtered = allcategories.filter((c)=>c.category_name.toLowerCase().includes(keyword))
+        setCategories(filtered)
+    }
+  }
   return (
     <AdminLayout>
       <div>
@@ -26,7 +39,8 @@ const ManageCategory = () => {
         </h5>
 
         <div className='mb-4'>
-          <input type='text' className='form-control w-50' placeholder='Search By Category Name...'></input>
+          <input type='text' className='form-control w-50' placeholder='Search By Category Name...'
+          onChange={(e)=>handleSearch(e.target.value)}></input>
         </div>
 
         <table className='table table-bordered table-hover table-striped'>
