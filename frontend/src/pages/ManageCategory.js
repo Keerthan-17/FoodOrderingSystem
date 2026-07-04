@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AdminLayout from '../components/AdminLayout'
 import { Link } from 'react-router-dom'
+import {CSVLink} from 'react-csv'
 
 const ManageCategory = () => {
   
@@ -38,9 +39,13 @@ const ManageCategory = () => {
           <span className='ms-2 me-2 badge bg-success'>{categories.length}</span>
         </h5>
 
-        <div className='mb-4'>
+        <div className='mb-4 d-flex justify-content-between'>
           <input type='text' className='form-control w-50' placeholder='Search By Category Name...'
           onChange={(e)=>handleSearch(e.target.value)}></input>
+
+          <CSVLink data={categories} className='btn btn-success' filename={'category_list.csv'}>
+            <i className='fas fa-file-csv me-2'></i> Export to CSV
+          </CSVLink>
         </div>
 
         <table className='table table-bordered table-hover table-striped'>
