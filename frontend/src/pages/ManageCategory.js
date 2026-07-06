@@ -59,7 +59,7 @@ const ManageCategory = () => {
           </thead>
           <tbody>
             {categories.map((cat,index)=>(
-            <tr>
+            <tr key={cat.id}>
               <td>{index+1}</td>
               <td>{cat.category_name}</td>
               <td>{new Date(cat.creation_date).toLocaleString()}</td>
