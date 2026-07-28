@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 from dotenv import load_dotenv
 import os
 from urllib.parse import urlparse, parse_qsl
@@ -81,7 +80,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+
 load_dotenv()
+
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
