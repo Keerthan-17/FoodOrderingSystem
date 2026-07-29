@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,parser_classes
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
@@ -29,3 +29,15 @@ def manage_category_api(request):
   categories = Category.objects.all()
   serializer = CategorySerializer(categories, many=True)
   return Response(serializer.data)
+
+from rest_framework.parsers import MultiPartParser, FormParser
+from .serializers import FoodSerializer
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
+def add_food_item_api(request):
+  serializer = FoodSerializer(data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response({"message":"Food has been Added Successfully."},status=201)
+  return Response({"message": "Something went wrong!!"},status=400)
