@@ -21,6 +21,7 @@ const AddCategory = () => {
     
         if (response.status===201) {
           toast.success(data.message)
+          setCategoryName('')
         }
         else {
           toast.error("Something went wrong!!")
