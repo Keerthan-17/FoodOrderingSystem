@@ -41,3 +41,9 @@ def add_food_item_api(request):
     serializer.save()
     return Response({"message":"Food has been Added Successfully."},status=201)
   return Response({"message": "Something went wrong!!"},status=400)
+
+@api_view(['GET'])
+def manage_foods_api(request):
+  foods = Food.objects.all()
+  serializer = FoodSerializer(foods, many=True)
+  return Response(serializer.data)
