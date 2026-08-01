@@ -1,0 +1,22 @@
+.hero{
+  min-height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundStyle{
+  background-color: rgba(0,0,0,0.5);
+  padding: 40px 20px;
+  border-radius: 10px;
+}
+
+@media (max-width:768px) {
+  .hero{
+    min-height: 300px;
+  }
+}
