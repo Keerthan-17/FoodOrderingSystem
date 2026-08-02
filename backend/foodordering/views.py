@@ -47,3 +47,10 @@ def manage_foods_api(request):
   foods = Food.objects.all()
   serializer = FoodSerializer(foods, many=True)
   return Response(serializer.data)
+
+@api_view(['GET'])
+def food_search_api(request):
+  query = request.GET.get('q','')
+  foods = Food.objects.filter(item_name__icontains=query)
+  serializer = FoodSerializer(foods, many=True)
+  return Response(serializer.data)
