@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/layout.css'
 import {
   FaHome,
@@ -11,6 +11,20 @@ import {
 } from "react-icons/fa";
 
 const PublicLayout = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem("userId");
+  const name = localStorage.getItem("userName");
+
+  useEffect(()=>{
+    if (userId) {
+      setIsLoggedIn(true);
+      setUserName(name);
+    }
+  },[userId])
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">

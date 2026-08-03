@@ -71,10 +71,10 @@ const Login = () => {
             <form className="card p-4 shadow" onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
-                  name="username"
+                  name="emailcont"
                   type="text"
                   className="form-control"
-                  value={formData.userName}
+                  value={formData.emailcont}
                   onChange={handleChange}
                   placeholder="UserName"
                 ></input>
