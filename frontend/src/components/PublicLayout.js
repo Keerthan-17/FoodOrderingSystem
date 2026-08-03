@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/layout.css'
 import {
+  FaHeart,
   FaHome,
+  FaShoppingCart,
   FaSignInAlt,
   FaTruck,
+  FaUser,
   FaUserPlus,
   FaUserShield,
   FaUtensils,
@@ -25,6 +28,13 @@ const PublicLayout = ({ children }) => {
       setUserName(name);
     }
   },[userId])
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId")
+    localStorage.removeItem("userName")
+    setIsLoggedIn(false);
+    navigate('/login');
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -61,7 +71,9 @@ const PublicLayout = ({ children }) => {
                   Track
                 </Link>
               </li>
-              <li className="nav-item mx-1">
+              {!isLoggedIn ? (
+                <>
+                <li className="nav-item mx-1">
                 <Link className="nav-link" to="/register">
                   <FaUserPlus className="me-1 icon-fix" />
                   Register
@@ -79,6 +91,37 @@ const PublicLayout = ({ children }) => {
                   Admin
                 </Link>
               </li>
+                </>
+              ): (
+                <>
+                <li className="nav-item mx-1">
+                <Link className="nav-link" to="/admin-login">
+                  <FaUser className="me-1 icon-fix" />
+                  My Orders
+                </Link>
+              </li>
+              <li className="nav-item mx-1">
+                <Link className="nav-link" to="/admin-login">
+                  <FaShoppingCart className="me-1 icon-fix" />
+                  Cart
+                </Link>
+              </li>
+              <li className="nav-item mx-1">
+                <Link className="nav-link" to="/admin-login">
+                  <FaHeart className="me-1 icon-fix" />
+                  Wishlist
+                </Link>
+              </li>
+              <li className="nav-item mx-1">
+                <Link className="nav-link" to="/admin-login">
+                  <FaUserShield className="me-1 icon-fix" />
+                  {userName}
+                </Link>
+              </li>
+                </>
+              )}
+
+              
             </ul>
           </div>
         </div>
