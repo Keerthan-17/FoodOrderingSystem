@@ -9,4 +9,5 @@ urlpatterns = [
     path('manage-foods/',manage_foods_api),
     path('foods_search/',food_search_api),
     path('random_foods/',random_foods_api),
+    path('register/',register_user),
 ]

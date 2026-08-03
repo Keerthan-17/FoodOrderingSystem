@@ -63,3 +63,18 @@ def random_foods_api(request):
   limited_foods = foods[0:9]
   serializer = FoodSerializer(limited_foods, many=True)
   return Response(serializer.data)
+
+from django.contrib.auth.hashers import make_password
+
+@api_view(['POST'])
+def register_user(request):
+  firstname = request.data.get('firstname')
+  lastname = request.data.get('lastname')
+  email = request.data.get('email')
+  mobilenumber = request.data.get('mobilenumber')
+  password = request.data.get('password')
+
+  if User.objects.filter(email=email).exists() or User.objects.filter(mobile=mobilenumber).exists() :
+    return Response({"message":"Email or mobile already registered"},status=400)
+  User.objects.create(first_name = firstname, last_name = lastname, email=email, mobile=mobilenumber, password=make_password(password))
+  return Response({"message": "User registered successfully"},status=201)

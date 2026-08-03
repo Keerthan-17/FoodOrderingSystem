@@ -48,7 +48,7 @@ const PublicLayout = ({ children }) => {
                 </Link>
               </li>
               <li className="nav-item mx-1">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/register">
                   <FaUserPlus className="me-1 icon-fix" />
                   Register
                 </Link>
