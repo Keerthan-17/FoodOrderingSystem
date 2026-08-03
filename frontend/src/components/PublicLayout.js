@@ -54,7 +54,7 @@ const PublicLayout = ({ children }) => {
                 </Link>
               </li>
               <li className="nav-item mx-1">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/login">
                   <FaSignInAlt className="me-1 icon-fix" />
                   Login
                 </Link>

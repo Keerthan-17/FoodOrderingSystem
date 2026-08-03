@@ -14,7 +14,7 @@ const Register = () => {
     repeatpassword: "",
   });
 
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +65,9 @@ const Register = () => {
           password: "",
           repeatpassword: "",
         });
+        setTimeout(()=>{
+                navigate('/Login')
+            },2000)
       } else {
         toast.error(result.message || "Something went wrong");
       }
@@ -160,7 +163,7 @@ const Register = () => {
                 style={{ maxHeight: "400px" }}
               ></img>
               <h5 style={{ marginTop: "-1.5rem" }}>
-                Registration is fat, secure and free.
+                Registration is fast, secure and free.
               </h5>
               <p className="text-muted small">
                 Join our food family and enjoy delicious food delivered to your
