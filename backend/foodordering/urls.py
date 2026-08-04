@@ -11,4 +11,5 @@ urlpatterns = [
     path('random_foods/',random_foods_api),
     path('register/',register_user),
     path('login/',user_login),
+    path('foods/<int:id>',food_details),
 ]
