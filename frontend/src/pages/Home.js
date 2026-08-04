@@ -71,7 +71,6 @@ const Home = () => {
                       className="card-img-top"
                       style={{ height: "180px" }}
                       alt="Food Img"
-                      to={`/food/${food.id}`}
                     />
                     <div className="card-body">
                       <h5 className="card-title">
@@ -83,7 +82,10 @@ const Home = () => {
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">₹ {food.item_price}</span>
                         {food.is_available ? (
-                          <Link className="btn btn-outline-primary btn-sm" to={`/food/${food.id}`}>
+                          <Link
+                            className="btn btn-outline-primary btn-sm"
+                            to={`/food/${food.id}`}
+                          >
                             <i className="fas fa-shopping-basket me-1"></i>
                             Order Now
                           </Link>
