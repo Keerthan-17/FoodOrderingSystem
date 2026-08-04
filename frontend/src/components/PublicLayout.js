@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import '../styles/layout.css'
+import "../styles/layout.css";
 import {
+  FaCog,
+  FaCogs,
   FaHeart,
   FaHome,
   FaShoppingCart,
   FaSignInAlt,
+  FaSignOutAlt,
   FaTruck,
   FaUser,
+  FaUserCircle,
   FaUserPlus,
   FaUserShield,
   FaUtensils,
@@ -16,25 +20,25 @@ import {
 const PublicLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
-  
+
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId");
   const name = localStorage.getItem("userName");
 
-  useEffect(()=>{
+  useEffect(() => {
     if (userId) {
       setIsLoggedIn(true);
       setUserName(name);
     }
-  },[userId])
+  }, [userId]);
 
   const handleLogout = () => {
-    localStorage.removeItem("userId")
-    localStorage.removeItem("userName")
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
     setIsLoggedIn(false);
-    navigate('/login');
-  }
+    navigate("/login");
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -73,55 +77,82 @@ const PublicLayout = ({ children }) => {
               </li>
               {!isLoggedIn ? (
                 <>
-                <li className="nav-item mx-1">
-                <Link className="nav-link" to="/register">
-                  <FaUserPlus className="me-1 icon-fix" />
-                  Register
-                </Link>
-              </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" to="/login">
-                  <FaSignInAlt className="me-1 icon-fix" />
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" to="/admin-login">
-                  <FaUserShield className="me-1 icon-fix" />
-                  Admin
-                </Link>
-              </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/register">
+                      <FaUserPlus className="me-1 icon-fix" />
+                      Register
+                    </Link>
+                  </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/login">
+                      <FaSignInAlt className="me-1 icon-fix" />
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/admin-login">
+                      <FaUserShield className="me-1 icon-fix" />
+                      Admin
+                    </Link>
+                  </li>
                 </>
-              ): (
+              ) : (
                 <>
-                <li className="nav-item mx-1">
-                <Link className="nav-link" to="/admin-login">
-                  <FaUser className="me-1 icon-fix" />
-                  My Orders
-                </Link>
-              </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" to="/admin-login">
-                  <FaShoppingCart className="me-1 icon-fix" />
-                  Cart
-                </Link>
-              </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" to="/admin-login">
-                  <FaHeart className="me-1 icon-fix" />
-                  Wishlist
-                </Link>
-              </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" to="/admin-login">
-                  <FaUserShield className="me-1 icon-fix" />
-                  {userName}
-                </Link>
-              </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/admin-login">
+                      <FaUser className="me-1 icon-fix" />
+                      My Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/admin-login">
+                      <FaShoppingCart className="me-1 icon-fix" />
+                      Cart
+                    </Link>
+                  </li>
+                  <li className="nav-item mx-1">
+                    <Link className="nav-link" to="/admin-login">
+                      <FaHeart className="me-1 icon-fix" />
+                      Wishlist
+                    </Link>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle text-capitalize"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                    >
+                      <FaUserCircle className="me-1 icon-fix" />
+                      {userName}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <Link class="dropdown-item" to="#">
+                          <FaUser className="me-1 icon-fix" />
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link class="dropdown-item" to="#">
+                          <FaCog className="me-1 icon-fix" />
+                          Settings
+                        </Link>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <button class="dropdown-item" onClick={handleLogout}>
+                          <FaSignOutAlt className="me-1 icon-fix" />
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
                 </>
               )}
-
-              
             </ul>
           </div>
         </div>
