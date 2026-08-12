@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FoodDetails = () => {
   const userId = localStorage.getItem("userId");
   const [food, setFood] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/foods/${id}`)
@@ -19,9 +22,41 @@ const FoodDetails = () => {
       });
   }, []);
 
+  const handleAddToCart = async () => {
+    if (!userId) {
+      navigate("/login");
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/cart/add/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: userId,
+          foodId: food.id,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.status === 200) {
+        toast.success(result.message || "Item added to cart");
+        setTimeout(() => {
+          navigate("/cart");
+        }, 2000);
+      } else {
+        toast.error(result.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error connecting to server");
+    }
+  };
+
   if (!food) return <div>Loading...</div>;
   return (
     <PublicLayout>
+      <ToastContainer autoClose={2000} position="top-right" />
       <div className="container py-5">
         <div className="row">
           <div className="col-md-5">
@@ -47,7 +82,10 @@ const FoodDetails = () => {
             </p>
 
             {food.is_available ? (
-              <button className="btn btn-warning btn-lg mt-3 px-4">
+              <button
+                className="btn btn-warning btn-lg mt-3 px-4"
+                onClick={handleAddToCart}
+              >
                 <i className="fas fa-cart-plus me-1"></i>
                 Add to Cart
               </button>
